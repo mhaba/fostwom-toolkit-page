@@ -10,12 +10,33 @@ questions.forEach(q => {
     item.innerHTML = q.question;
     item._data = q;
 
-    item.addEventListener('click', function() {
+    const more_button = document.createElement("button");
+    more_button.className = "more__button"
+    more_button.innerHTML = ">>";
+    appendItem(more_button, item, trans_time);
+
+    createQuestionEventListener(q, item)
+    more_button.addEventListener('click', addClassSelected)
+    
+})
+
+function addClassSelected(evt){
+    evt.target.classList.add("selected");
+}
+
+function createQuestionEventListener(q, item) {
+    item.addEventListener('click', function(evt) {
         const answer_item = document.createElement("p");
+        
         answer_item.className = "answer__item";
         answer_item.innerHTML = this._data.answer;
         
-        // const answer = this._data.answer;
+        Array.from(document.getElementsByClassName('more__button')).forEach(b => b.classList.remove("selected"))
+        if(evt.target.className != "more__button") {
+            evt.target.lastElementChild.focus();
+            evt.target.lastElementChild.classList.add("selected");
+        }
+
         const child = q.answer_parent.lastElementChild;
         if (child) {
             if (child.innerHTML != answer_item.innerHTML) {
@@ -28,7 +49,7 @@ questions.forEach(q => {
             appendItem(answer_item, q.answer_parent, trans_time)
         }
     })
-})
+}
 
 function appendItem(item, parent_item, seconds) {
     const ms = seconds * 1000;
