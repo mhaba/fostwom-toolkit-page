@@ -154,6 +154,24 @@ p {
     font-weight: 700;
     transition: 250ms linear;
 }
+.landing__button {
+    background: #FE3B00;
+    border: 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 1.6rem 2.4rem;
+    line-height: 1;
+    border-radius: .2rem;
+    color: #7F1E00;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(0.65, 0, 0.35, 1);
+    margin: 2.4rem 0;
+    display: inline-block
+}
+.landing__button:hover {
+    background: #5F1600;
+    color: #FF531E;
+}
 @media (min-width: 992px){
     .landing{
         width: 100%;
@@ -217,6 +235,40 @@ p {
 }
 .selected {
     background-color: #A9A9A9;
+}
+
+.hide, .hide > * {
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0; 
+    visibility: hidden;
+    -webkit-transition: visibility 0.2s linear,
+    opacity 250mss linear;
+    -moz-transition: visibility 0.2s linear,
+    opacity 250 linear;
+    -o-transition: visibility 0.2s linear,
+    opacity 250ms linear; 
+    transition:
+        /*visibility 250ms linear,
+        opacity 250ms linear;*/
+        all 250 ease-in-out;
+}
+.show, .show > * {
+    display: grid;
+    opacity: 1; 
+    visibility: visible;
+    -webkit-transition: visibility 0.2s linear,
+    opacity 250mss linear;
+    -moz-transition: visibility 0.2s linear,
+    opacity 250 linear;
+    -o-transition: visibility 0.2s linear,
+    opacity 250ms linear; 
+    transition:
+        visibility 250ms linear,
+        opacity 250ms linear,
+        transform 250ms ease-in-out;
 }
 
 .clipPath {

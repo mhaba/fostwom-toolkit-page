@@ -2,24 +2,56 @@ import { questions } from "./questions.js";
 
 const trans_time = 0.5
 
-questions.forEach(q => {
-    const item = document.createElement("p");
-    q.question_parent.appendChild(item)
+main()
 
-    item.className = "question__item";
-    item.innerHTML = q.question;
-    item._data = q;
+function main() {
+    questions.forEach(q => {
+        const item = document.createElement("p");
+        q.question_parent.appendChild(item)
 
-    const more_button = document.createElement("button");
-    more_button.className = "more__button"
-    more_button.innerHTML = ">>";
-    more_button.title = "Show more";
-    appendItem(more_button, item, trans_time);
+        item.className = "question__item";
+        item.innerHTML = q.question;
+        item._data = q;
 
-    createQuestionEventListener(q, item)
-    more_button.addEventListener('click', addClassSelected)
-    
-})
+        const more_button = document.createElement("button");
+        more_button.className = "more__button"
+        more_button.innerHTML = ">>";
+        more_button.title = "Show more";
+        appendItem(more_button, item, trans_time);
+
+        createQuestionEventListener(q, item);
+        more_button.addEventListener('click', addClassSelected);
+        
+    })
+
+    const content_btn = document.getElementById("content_exp_btn");
+    const visual_btn = document.getElementById("visual_desg_btn");
+
+    content_btn.addEventListener('click', hideOpposite);
+    visual_btn.addEventListener('click', hideOpposite);
+}
+
+function hideOpposite() {
+    const btn_id = this.id;
+    let to_hide;
+    let to_show;
+    if(btn_id == "content_exp_btn") {
+        to_hide = document.getElementsByClassName("visual__designer");
+        to_show = document.getElementsByClassName("content__expert");
+    }
+    else {
+        to_hide = document.getElementsByClassName("content__expert");
+        to_show = document.getElementsByClassName("visual__designer");
+    }
+    Array.from(to_hide).forEach(e => {
+        e.classList.add("hide");
+        e.classList.remove("show");
+    })
+    Array.from(to_show).forEach(e => {
+        e.classList.add("show");
+        e.classList.remove("hide")
+    })
+}
 
 function addClassSelected(evt){
     evt.target.classList.add("selected");
