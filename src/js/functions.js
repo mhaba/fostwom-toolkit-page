@@ -13,6 +13,7 @@ questions.forEach(q => {
     const more_button = document.createElement("button");
     more_button.className = "more__button"
     more_button.innerHTML = ">>";
+    more_button.title = "Show more";
     appendItem(more_button, item, trans_time);
 
     createQuestionEventListener(q, item)
